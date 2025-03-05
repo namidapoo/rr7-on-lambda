@@ -1,14 +1,14 @@
 import { Await } from "react-router";
-import type { Route } from "./+types/streaming";
-import { type FC, Suspense } from "react";
+import type { Route } from "./+types/await";
+import { type FC, Suspense, use } from "react";
 
-export const loader = async ({}: Route.LoaderArgs) => {
+export const loader = async () => {
 	// これは待機されないことに注意してください
-	const nonCriticalData = new Promise((res) =>
+	const nonCriticalData: Promise<string> = new Promise((res) =>
 		setTimeout(() => res("non-critical"), 5000),
 	);
 
-	const criticalData = await new Promise((res) =>
+	const criticalData: Promise<string> = new Promise((res) =>
 		setTimeout(() => res("critical"), 300),
 	);
 
